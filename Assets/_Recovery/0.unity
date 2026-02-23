@@ -417,7 +417,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.65, y: 0.08116728}
+  m_Size: {x: 1.1842217, y: 0.08116728}
   m_EdgeRadius: 0
 --- !u!114 &961269918
 MonoBehaviour:
@@ -629,24 +629,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1afb8e95573b50a44a669775d6e40988, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  speed: 15
-  jumpHeight: 13
-  acceleration: 5
-  decceleration: 3
-  gravPowrr: -2
-  frictionAmount: 0.2
-  timeToDeployWings: 0.1
-  distanceToDeployWings: 7
-  dragValue: 0.5
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 64
+  speed: 10
+  jumpHeight: 12
   moveAction: {fileID: -338029825471685325, guid: fb66ad31c0526da47839f06c435e2c69, type: 3}
   jumpAction: {fileID: 1257512075107937405, guid: fb66ad31c0526da47839f06c435e2c69, type: 3}
-  glideAction: {fileID: -8645965312417150018, guid: fb66ad31c0526da47839f06c435e2c69, type: 3}
   groundedPlayer: 0
-  isJumpPressed: 0
-  isGlidePressed: 0
 --- !u!212 &1589468456
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -754,10 +741,6 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 96eebe76-97ea-48ea-a52d-a893b599d6f9
     m_ActionName: 'Moving/Move[/Keyboard/a,/Keyboard/d]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: f19720cb-d076-4d3a-9c99-84ed1248fa36
-    m_ActionName: 'Moving/Glide[/Keyboard/shift]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: Moving
