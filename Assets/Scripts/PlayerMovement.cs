@@ -163,4 +163,13 @@ public class PlayerMovement : MonoBehaviour
 
         isRight = !isRight;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 7)
+        {
+            Debug.Log("COIN!");
+            collision.gameObject.GetComponent<Coin>().AddCoin();
+        }
+    }
 }
