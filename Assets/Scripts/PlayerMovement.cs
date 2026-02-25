@@ -36,6 +36,8 @@ public class PlayerMovement : MonoBehaviour
     public bool isJumpPressed;
     public bool isGlidePressed;
 
+    private bool isRight = true;
+
     private Vector2 moveDirection;
     private Vector3 playerVelocity;
 
@@ -64,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         isJumpPressed = jumpAction.action.WasPressedThisFrame();
-        isGlidePressed = glideAction.action.WasPerformedThisFrame();
+        isGlidePressed = glideAction.action.IsPressed();
 
         if (isJumpPressed && groundedPlayer)
         {
@@ -75,6 +77,7 @@ public class PlayerMovement : MonoBehaviour
         if (!groundedPlayer)
         {
             timeInAir += Time.deltaTime;
+            CanGlide();
             rb.AddForceY(gravPowrr, ForceMode2D.Force);
         }
 
@@ -84,6 +87,16 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         moveDirection = moveAction.action.ReadValue<Vector2>();
+
+        if (moveDirection.x > 0f && !isRight)
+        {
+            FlipCharacter();
+        }
+
+        else if (moveDirection.x < 0f && isRight)
+        {
+            FlipCharacter();
+        }
 
         float topSpeed = moveDirection.x * speed;
 
@@ -110,14 +123,15 @@ public class PlayerMovement : MonoBehaviour
             Glide();
         }
 
-        else
+        else if (!isGlidePressed || !CanGlide())
         {
-
+            rb.linearDamping = 0f;
         }
     }
 
     private void Glide()
     {
+        rb.linearDamping = dragValue;
         Debug.Log("isGliding");
     }
 
@@ -125,6 +139,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (timeInAir >= timeToDeployWings)
         {
+            Debug.Log("can glide");
             return !Physics2D.Raycast(transform.position, Vector2.down, timeToDeployWings, groundMask);
         }
         return false;
@@ -138,5 +153,14 @@ public class PlayerMovement : MonoBehaviour
     private void DebugChecking()
     {
 
+    }
+
+    void FlipCharacter()
+    {
+        Vector3 currentScale = gameObject.transform.localScale;
+        currentScale.x *= -1;
+        gameObject.transform.localScale = currentScale;
+
+        isRight = !isRight;
     }
 }
