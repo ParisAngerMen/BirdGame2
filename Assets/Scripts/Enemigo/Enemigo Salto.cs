@@ -1,18 +1,17 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Movimiento2D : MonoBehaviour
+public class EnemigoSaltadorBasico2D : MonoBehaviour
 {
-    public float velocidad = 8f;
-    public float fuerzaSalto = 15f;
+    public float fuerzaSalto = 10f;
+    public float fuerzaHorizontal = 5f;
+    public float intervaloSalto = 1.5f;
+    public float tiempoCambioDireccion = 4f;
 
     private Rigidbody2D rb;
-    private float movimiento;
-    private bool enSuelo;
-
-    public Transform puntoSuelo;
-    public float radioSuelo = 0.2f;
-    public LayerMask capaSuelo;
+    private float contadorSalto;
+    private float contadorDireccion;
+    private int direccion = 1;
 
     void Start()
     {
@@ -21,21 +20,24 @@ public class Movimiento2D : MonoBehaviour
 
     void Update()
     {
-        // Movimiento horizontal
-        movimiento = Input.GetAxisRaw("Horizontal");
+        contadorSalto += Time.deltaTime;
+        contadorDireccion += Time.deltaTime;
 
-        // Comprobaci�n suelo
-        enSuelo = Physics2D.OverlapCircle(puntoSuelo.position, radioSuelo, capaSuelo);
-
-        // Salto
-        if (Input.GetButtonDown("Jump") && enSuelo)
+        if (contadorSalto >= intervaloSalto)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, fuerzaSalto);
+            rb.linearVelocity = new Vector2(direccion * fuerzaHorizontal, fuerzaSalto);
+            contadorSalto = 0f;
         }
-    }
 
-    void FixedUpdate()
-    {
-        rb.linearVelocity = new Vector2(movimiento * velocidad, rb.linearVelocity.y);
+        if (contadorDireccion >= tiempoCambioDireccion)
+        {
+            direccion *= -1;
+
+            Vector3 escala = transform.localScale;
+            escala.x *= -1;
+            transform.localScale = escala;
+
+            contadorDireccion = 0f;
+        }
     }
 }
