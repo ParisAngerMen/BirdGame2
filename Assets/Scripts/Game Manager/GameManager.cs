@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public float totalPoints;
-
+    public float totalPoints = 0;
     public static GameManager instance { get; private set; }
 
     private void Awake()

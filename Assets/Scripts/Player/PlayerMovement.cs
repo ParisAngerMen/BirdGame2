@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
+using UnityEngine.Tilemaps;
 using UnityEngine.Windows;
 
 public class PlayerMovement : MonoBehaviour
@@ -14,11 +15,13 @@ public class PlayerMovement : MonoBehaviour
     public float decceleration;
     public float gravPowrr;
     public float frictionAmount;
+    public float jumpAmount;
 
     private float velPower = 1f;
     private float timeInAir;
     private bool isGliding;
     private float initialDrag;
+    private float currentJump = 1f;
 
     [Header("Gliding")]
     [SerializeField] private float timeToDeployWings;
@@ -68,10 +71,12 @@ public class PlayerMovement : MonoBehaviour
         isJumpPressed = jumpAction.action.WasPressedThisFrame();
         isGlidePressed = glideAction.action.IsPressed();
 
-        if (isJumpPressed && groundedPlayer)
+        if (isJumpPressed && (groundedPlayer || currentJump <= jumpAmount))
         {
             Debug.Log("JUMP");
             rb.AddForceY(jumpHeight, ForceMode2D.Impulse);
+            currentJump++;
+
         }
 
         if (!groundedPlayer)
@@ -79,6 +84,11 @@ public class PlayerMovement : MonoBehaviour
             timeInAir += Time.deltaTime;
             CanGlide();
             rb.AddForceY(gravPowrr, ForceMode2D.Force);
+        }
+
+        else
+        {
+            currentJump = 1;
         }
 
     }
