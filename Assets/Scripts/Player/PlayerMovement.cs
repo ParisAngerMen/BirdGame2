@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.Tilemaps;
@@ -23,6 +23,12 @@ public class PlayerMovement : MonoBehaviour
     private float initialDrag;
     private float currentJump = 1f;
 
+    [Header("Jump Cut")]                                         // ← NEW
+    [Range(0f, 1f)]                                              // ← NEW
+    [SerializeField] private float jumpCutMultiplier = 0.4f;     // ← NEW
+    [SerializeField] private float fallGravityMultiplier = 1.5f; // ← NEW
+    private bool isJumpCut;
+
     [Header("Gliding")]
     [SerializeField] private float timeToDeployWings;
     [SerializeField] private float distanceToDeployWings;
@@ -37,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Booleans")]
     public bool groundedPlayer;
     public bool isJumpPressed;
+    public bool isJumpReleased;                                  // ← NEW
     public bool isGlidePressed;
 
     private bool isRight = true;
@@ -69,13 +76,22 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         isJumpPressed = jumpAction.action.WasPressedThisFrame();
+        isJumpReleased = jumpAction.action.WasReleasedThisFrame();  
         isGlidePressed = glideAction.action.IsPressed();
 
         if (isJumpPressed && (groundedPlayer || currentJump <= jumpAmount))
         {
             Debug.Log("JUMP");
+            rb.linearVelocityY = 0f;
             rb.AddForceY(jumpHeight, ForceMode2D.Impulse);
             currentJump++;
+            isJumpCut = false;
+        }
+
+        if (isJumpReleased && !groundedPlayer && rb.linearVelocityY > 0f)
+        {
+            isJumpCut = true;
+            rb.linearVelocityY *= jumpCutMultiplier;
 
         }
 
@@ -83,7 +99,16 @@ public class PlayerMovement : MonoBehaviour
         {
             timeInAir += Time.deltaTime;
             CanGlide();
-            rb.AddForceY(gravPowrr, ForceMode2D.Force);
+
+            if (rb.linearVelocityY < 0f || isJumpCut)                 
+            {                                                          
+                rb.AddForceY(gravPowrr * fallGravityMultiplier, ForceMode2D.Force); 
+            }    
+            
+            else                                                       
+            {                                                          
+                rb.AddForceY(gravPowrr, ForceMode2D.Force);
+            }
         }
 
         else
