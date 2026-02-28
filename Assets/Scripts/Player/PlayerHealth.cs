@@ -1,12 +1,14 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private int maxHealth = 10; // 5 full hearts
+    [SerializeField] private float maxHealth = 10; // 5 full hearts
     [SerializeField] private HealthVisual healthVisual;
     [SerializeField] private RespawnScript respawnScript;
 
-    private int currentHealth;
+    private float currentHealth;
+    private bool isInv;
 
     private void Start()
     {
@@ -14,16 +16,20 @@ public class PlayerHealth : MonoBehaviour
         healthVisual.SetupHearts(maxHealth);
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
-        currentHealth = Mathf.Max(0, currentHealth - damage);
-        healthVisual.SetHealth(currentHealth);
+        if (!isInv)
+        {
+            currentHealth = Mathf.Max(0, currentHealth - damage);
+            healthVisual.SetHealth(currentHealth);
+            StartCoroutine(InvencibilityFrames());
+        }
 
         if (currentHealth <= 0)
             Die();
     }
 
-    public void Heal(int amount)
+    public void Heal(float amount)
     {
         currentHealth = Mathf.Min(maxHealth, currentHealth + amount);
         healthVisual.SetHealth(currentHealth);
@@ -35,12 +41,21 @@ public class PlayerHealth : MonoBehaviour
         respawnScript.Respawn();
     }
 
-    public int GetMaxHealth() => maxHealth;
-    public int GetCurrentHealth() => currentHealth;
+    public float GetMaxHealth() => maxHealth;
+    public float GetCurrentHealth() => currentHealth;
 
     public void ResetHealth()
     {
         currentHealth = maxHealth;
         healthVisual.SetupHearts(maxHealth);
+    }
+
+    private IEnumerator InvencibilityFrames()
+    {
+        isInv = true;
+
+        yield return new WaitForSeconds(5);
+
+        isInv = false;
     }
 }

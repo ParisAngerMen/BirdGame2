@@ -15,8 +15,8 @@ public class HealthVisual : MonoBehaviour
     [SerializeField] private Vector2 startPosition = new Vector2(20f, -20f);
 
     private List<HeartImage> heartImageList;
-    private int maxHealth;    // e.g. 10 = 5 full hearts (each heart = 2 HP)
-    private int currentHealth;
+    private float maxHealth;    // e.g. 10 = 5 full hearts (each heart = 2 HP)
+    private float currentHealth;
 
     private void Awake()
     {
@@ -27,7 +27,7 @@ public class HealthVisual : MonoBehaviour
     /// Call this to initialize the heart display.
     /// Each heart = 2 HP. So maxHealth of 10 = 5 hearts.
     /// </summary>
-    public void SetupHearts(int maxHealth)
+    public void SetupHearts(float maxHealth)
     {
         this.maxHealth = maxHealth;
         this.currentHealth = maxHealth;
@@ -50,7 +50,7 @@ public class HealthVisual : MonoBehaviour
     /// <summary>
     /// Call this whenever health changes.
     /// </summary>
-    public void SetHealth(int health)
+    public void SetHealth(float health)
     {
         currentHealth = Mathf.Clamp(health, 0, maxHealth);
         RefreshHeartVisuals();
@@ -77,7 +77,7 @@ public class HealthVisual : MonoBehaviour
         for (int i = 0; i < heartImageList.Count; i++)
         {
             // Each heart index represents 2 HP
-            int hpForThisHeart = currentHealth - (i * 2);
+            float hpForThisHeart = currentHealth - (i * 2);
 
             if (hpForThisHeart >= 2)
             {

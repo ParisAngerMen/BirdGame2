@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.Tilemaps;
@@ -23,10 +24,10 @@ public class PlayerMovement : MonoBehaviour
     private float initialDrag;
     private float currentJump = 1f;
 
-    [Header("Jump Cut")]                                         // ← NEW
-    [Range(0f, 1f)]                                              // ← NEW
-    [SerializeField] private float jumpCutMultiplier = 0.4f;     // ← NEW
-    [SerializeField] private float fallGravityMultiplier = 1.5f; // ← NEW
+    [Header("Jump Cut")]                                       
+    [Range(0f, 1f)]                                              
+    [SerializeField] private float jumpCutMultiplier = 0.4f;     
+    [SerializeField] private float fallGravityMultiplier = 1.5f; 
     private bool isJumpCut;
 
     [Header("Gliding")]
@@ -43,8 +44,9 @@ public class PlayerMovement : MonoBehaviour
     [Header("Booleans")]
     public bool groundedPlayer;
     public bool isJumpPressed;
-    public bool isJumpReleased;                                  // ← NEW
+    public bool isJumpReleased;                                  
     public bool isGlidePressed;
+    public bool isInv = false;
 
     private bool isRight = true;
 
@@ -219,8 +221,26 @@ public class PlayerMovement : MonoBehaviour
 
         if (collision.gameObject.layer == 8)
         {
-            health.TakeDamage(10);
+            health.TakeDamage(health.GetMaxHealth());
             transform.position = playerLastPos;
         }
+
+        if (collision.gameObject.CompareTag("Spikes"))
+        {
+            health.TakeDamage(1);
+            Debug.Log("Collided with spikes");
+        }
+
+
+        if (collision.gameObject.CompareTag("Health"))
+        {
+            health.Heal(2);
+            collision.gameObject.SetActive(false);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+
     }
 }

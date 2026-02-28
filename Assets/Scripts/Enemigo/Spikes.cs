@@ -8,8 +8,10 @@ public class Pinchos2D : MonoBehaviour
     public float velocidad = 2f;           // Velocidad subida/bajada
 
     [Header("Tiempo")]
-    public float tiempoOcultos = 3f;       // Tiempo escondidos
-    public float tiempoActivos = 2f;       // Tiempo fuera
+    public float tiempoOcultos = 3f;       
+    public float tiempoActivos = 2f;       
+
+    public bool inverse;
 
     private Vector3 posicionInicial;
     private Vector3 posicionVisible;
@@ -17,7 +19,16 @@ public class Pinchos2D : MonoBehaviour
     private void Start()
     {
         posicionInicial = transform.position;
-        posicionVisible = posicionInicial + Vector3.up * alturaFuera;
+        
+        if (!inverse)
+        {
+            posicionVisible = posicionInicial + Vector3.up * alturaFuera;
+        }
+
+        else
+        {
+            posicionVisible = posicionInicial + Vector3.down * alturaFuera;
+        }
 
         StartCoroutine(CicloPinchos());
     }

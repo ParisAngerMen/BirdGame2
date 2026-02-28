@@ -4,17 +4,6 @@ public class CheckpointScript : MonoBehaviour
 {
     public RespawnScript respawn;
     public GameObject respawnPoint;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -25,11 +14,12 @@ public class CheckpointScript : MonoBehaviour
             health.Heal(health.GetMaxHealth());
             respawn.SetCheckpoint(transform.position);
 
-            SavePrefs();
+            //SavePrefs();
 
         }
     }
 
+    /*
     public void SavePrefs()
     {
         PlayerPrefs.SetFloat("PlayerX", respawn.transform.position.x);
@@ -37,4 +27,5 @@ public class CheckpointScript : MonoBehaviour
         PlayerPrefs.SetFloat("PlayerZ", respawn.transform.position.y);
         PlayerPrefs.Save();
     }
+    */
 }
