@@ -50,6 +50,8 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 moveDirection;
     private Vector3 playerVelocity;
+    private Vector3 playerLastPos;
+    private PlayerHealth health;
 
     private void OnEnable()
     {
@@ -66,7 +68,8 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();   
+        rb = GetComponent<Rigidbody2D>();  
+        health = GetComponent<PlayerHealth>();
     }
     void Start()
     {
@@ -114,6 +117,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             currentJump = 1;
+            SavePosition(transform.position);
         }
 
     }
@@ -199,12 +203,24 @@ public class PlayerMovement : MonoBehaviour
         isRight = !isRight;
     }
 
+    void SavePosition(Vector3 pos)
+    {
+        playerLastPos = pos;
+        playerLastPos.y = playerLastPos.y + 10f;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == 7)
         {
             Debug.Log("COIN!");
             collision.gameObject.GetComponent<Coin>().AddCoin();
+        }
+
+        if (collision.gameObject.layer == 8)
+        {
+            health.TakeDamage(10);
+            transform.position = playerLastPos;
         }
     }
 }

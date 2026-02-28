@@ -10,8 +10,12 @@ public class PlayerGroundCheck : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Player has touched ground");
-        player.groundedPlayer = true;
+        if (collision.gameObject.layer == 6)
+        {
+            Debug.Log("Player has touched ground");
+            player.groundedPlayer = true;
+        }
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)

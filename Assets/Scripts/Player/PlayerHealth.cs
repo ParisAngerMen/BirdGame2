@@ -4,6 +4,7 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 10; // 5 full hearts
     [SerializeField] private HealthVisual healthVisual;
+    [SerializeField] private RespawnScript respawnScript;
 
     private int currentHealth;
 
@@ -31,5 +32,15 @@ public class PlayerHealth : MonoBehaviour
     private void Die()
     {
         Debug.Log("Player died!");
+        respawnScript.Respawn();
+    }
+
+    public int GetMaxHealth() => maxHealth;
+    public int GetCurrentHealth() => currentHealth;
+
+    public void ResetHealth()
+    {
+        currentHealth = maxHealth;
+        healthVisual.SetupHearts(maxHealth);
     }
 }

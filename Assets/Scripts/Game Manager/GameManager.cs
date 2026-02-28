@@ -21,4 +21,9 @@ public class GameManager : MonoBehaviour
     {
         totalPoints += value;
     }
+
+    public float GetPoints()
+    {
+        return totalPoints;
+    }
 }
