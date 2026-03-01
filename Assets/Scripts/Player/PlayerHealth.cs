@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private float maxHealth = 10; // 5 full hearts
-    [SerializeField] private HealthVisual healthVisual;
+    [SerializeField] public HealthVisual healthVisual;
     [SerializeField] private RespawnScript respawnScript;
 
     private float currentHealth;
@@ -18,7 +18,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if (!isInv || currentHealth > 0)
+        if (!isInv && currentHealth > 0)
         {
             currentHealth = Mathf.Max(0, currentHealth - damage);
             healthVisual.SetHealth(currentHealth);
@@ -52,10 +52,13 @@ public class PlayerHealth : MonoBehaviour
 
     private IEnumerator InvencibilityFrames()
     {
+        
         isInv = true;
 
         yield return new WaitForSeconds(5);
 
         isInv = false;
+
+        
     }
 }

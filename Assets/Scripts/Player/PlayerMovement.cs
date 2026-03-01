@@ -245,8 +245,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (collision.gameObject.layer == 8)
         {
-            //health.Die();
-            health.TakeDamage(health.GetMaxHealth());
+            health.Die();
+            health.healthVisual.SetHealth(0);
         }
 
         if (collision.gameObject.CompareTag("Spikes"))
