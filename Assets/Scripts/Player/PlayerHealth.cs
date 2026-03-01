@@ -18,7 +18,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if (!isInv)
+        if (!isInv || currentHealth > 0)
         {
             currentHealth = Mathf.Max(0, currentHealth - damage);
             healthVisual.SetHealth(currentHealth);
@@ -35,7 +35,7 @@ public class PlayerHealth : MonoBehaviour
         healthVisual.SetHealth(currentHealth);
     }
 
-    private void Die()
+    public void Die()
     {
         Debug.Log("Player died!");
         respawnScript.Respawn();

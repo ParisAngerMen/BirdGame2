@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 676ec887a915c4c4e84ec3ca37f14193
+guid: e2b9a42787032f84da57d91793c737f2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5507410935237871940
-    second: bg_grasslands_0
+      213: 68163745193962713
+    second: pokerMad_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bg_grasslands_0
+      name: pokerMad_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1024
-        height: 512
+        width: 48
+        height: 146
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cb67b051feeb193b0800000000000000
-      internalID: -5507410935237871940
+      spriteID: 9dca8daa09a22f000800000000000000
+      internalID: 68163745193962713
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      bg_grasslands_0: -5507410935237871940
+      pokerMad_0: 68163745193962713
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

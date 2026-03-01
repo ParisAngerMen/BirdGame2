@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5349939806544486505}
   - component: {fileID: 4696606874470863914}
   - component: {fileID: 3320166677089839747}
+  - component: {fileID: -5779664459731594821}
   m_Layer: 0
   m_Name: Enemigo salto (arreglar)
   m_TagString: Untagged
@@ -182,3 +183,16 @@ MonoBehaviour:
   fuerzaHorizontal: 3
   intervaloSalto: 1.5
   tiempoCambioDireccion: 4
+--- !u!114 &-5779664459731594821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7336881481198235012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 562e553b04b5b5044bd541c2d8a27b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  maxHealth: 0

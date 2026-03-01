@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 676ec887a915c4c4e84ec3ca37f14193
+guid: 7868a66cc6875994a8efbe7282680d51
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5507410935237871940
-    second: bg_grasslands_0
+      213: 1631046737135419804
+    second: snailWalk2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bg_grasslands_0
+      name: snailWalk2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1024
-        height: 512
+        width: 57
+        height: 31
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cb67b051feeb193b0800000000000000
-      internalID: -5507410935237871940
+      spriteID: c914403ad54a2a610800000000000000
+      internalID: 1631046737135419804
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      bg_grasslands_0: -5507410935237871940
+      snailWalk2_0: 1631046737135419804
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

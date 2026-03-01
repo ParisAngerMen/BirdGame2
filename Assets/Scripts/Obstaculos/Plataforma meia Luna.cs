@@ -30,4 +30,12 @@ public class PlataformaMediaLuna : MonoBehaviour
 
         transform.position = centro + new Vector3(x, y, 0f);
     }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collision.transform.parent = gameObject.transform;
+        }
+    }
 }

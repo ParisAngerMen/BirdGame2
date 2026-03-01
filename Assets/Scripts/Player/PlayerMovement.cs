@@ -40,19 +40,30 @@ public class PlayerMovement : MonoBehaviour
     public InputActionReference moveAction;
     public InputActionReference jumpAction;
     public InputActionReference glideAction;
+    public InputActionReference attackAction;
 
     [Header("Booleans")]
     public bool groundedPlayer;
     public bool isJumpPressed;
     public bool isJumpReleased;                                  
     public bool isGlidePressed;
-    public bool isInv = false;
 
+    [Header("Attack")]
+    [SerializeField] private GameObject attackPoint;
+    [SerializeField] private float attackRadius;
+    [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private float playerDamage;
+    [SerializeField] public float attackRate;
+    private float nextAttackTime = 0f;
+
+
+    private bool isAttack;
     private bool isRight = true;
 
     private Vector2 moveDirection;
     private Vector3 playerVelocity;
     private Vector3 playerLastPos;
+
     private PlayerHealth health;
 
     private void OnEnable()
@@ -60,6 +71,7 @@ public class PlayerMovement : MonoBehaviour
         moveAction.action.Enable();
         jumpAction.action.Enable();
         glideAction.action.Enable();
+        attackAction.action.Enable();
     }
 
     private void OnDisable()
@@ -67,6 +79,7 @@ public class PlayerMovement : MonoBehaviour
         moveAction.action.Disable();
         jumpAction.action.Disable();
         glideAction.action.Disable();
+        attackAction.action.Disable();
     }
     private void Awake()
     {
@@ -83,6 +96,7 @@ public class PlayerMovement : MonoBehaviour
         isJumpPressed = jumpAction.action.WasPressedThisFrame();
         isJumpReleased = jumpAction.action.WasReleasedThisFrame();  
         isGlidePressed = glideAction.action.IsPressed();
+        isAttack = Mouse.current.leftButton.wasPressedThisFrame;
 
         if (isJumpPressed && (groundedPlayer || currentJump <= jumpAmount))
         {
@@ -120,6 +134,16 @@ public class PlayerMovement : MonoBehaviour
         {
             currentJump = 1;
             SavePosition(transform.position);
+        }
+
+        if (Time.time >= nextAttackTime)
+        {
+            if (isAttack)
+            {
+                Debug.Log("Attack Pressed");
+                Attack();
+                nextAttackTime = Time.time + 1f / attackRate;
+            }
         }
 
     }
@@ -221,8 +245,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (collision.gameObject.layer == 8)
         {
+            //health.Die();
             health.TakeDamage(health.GetMaxHealth());
-            transform.position = playerLastPos;
         }
 
         if (collision.gameObject.CompareTag("Spikes"))
@@ -236,6 +260,19 @@ public class PlayerMovement : MonoBehaviour
         {
             health.Heal(2);
             collision.gameObject.SetActive(false);
+        }
+    }
+
+    private void Attack()
+    {
+
+
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.transform.position, attackRadius, enemyLayer);
+
+        foreach (Collider2D enemy in enemies)
+        {
+            enemy.gameObject.GetComponent<EnemyHealth>().TakeDamage(playerDamage);
+            Debug.Log("ouch");
         }
     }
 
