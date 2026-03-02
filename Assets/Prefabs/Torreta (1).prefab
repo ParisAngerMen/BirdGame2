@@ -289,7 +289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Torreta
   balaPrefab: {fileID: 7820310771586372995, guid: 7d6c6ebf8a51b1c41be44ff90c770468, type: 3}
   puntoDisparo: {fileID: 4832870526694842912}
-  tiempoEntreDisparos: 1
+  tiempoEntreDisparos: 3
 --- !u!1 &4898264986829807412
 GameObject:
   m_ObjectHideFlags: 0

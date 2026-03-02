@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7868a66cc6875994a8efbe7282680d51
+guid: f2366460ffb13c54782a4660ee426a35
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1631046737135419804
-    second: snailWalk2_0
+      213: -7409788283609738144
+    second: slimeBlock_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: snailWalk2_0
+      name: slimeBlock_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 17
         y: 0
-        width: 57
-        height: 31
+        width: 94
+        height: 93
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c914403ad54a2a610800000000000000
-      internalID: 1631046737135419804
+      spriteID: 064179690d42b2990800000000000000
+      internalID: -7409788283609738144
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d123a36cb1c280a40a682b1cf86cd116
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      snailWalk2_0: 1631046737135419804
+      slimeBlock_0: -7409788283609738144
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
