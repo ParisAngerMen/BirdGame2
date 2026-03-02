@@ -23,6 +23,7 @@ public class CheckpointScript : MonoBehaviour
             PlayerHealth health = collision.GetComponent<PlayerHealth>();
             health.Heal(health.GetMaxHealth());
             respawn.SetCheckpoint(transform.position);
+            GameManager.instance.PlaySound(GameManager.Sounds.checkpoint);
         }
     }
 

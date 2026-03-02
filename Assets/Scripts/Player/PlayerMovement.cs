@@ -100,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (isJumpPressed && (groundedPlayer || currentJump <= jumpAmount))
         {
-            Debug.Log("JUMP");
+            GameManager.instance.PlaySound(GameManager.Sounds.jump);
             rb.linearVelocityY = 0f;
             rb.AddForceY(jumpHeight, ForceMode2D.Impulse);
             currentJump++;
@@ -121,9 +121,9 @@ public class PlayerMovement : MonoBehaviour
 
             if (rb.linearVelocityY < 0f || isJumpCut)                 
             {                                                          
-                rb.AddForceY(gravPowrr * fallGravityMultiplier, ForceMode2D.Force); 
-            }    
-            
+                rb.AddForceY(gravPowrr * fallGravityMultiplier, ForceMode2D.Force);
+            }
+
             else                                                       
             {                                                          
                 rb.AddForceY(gravPowrr, ForceMode2D.Force);
@@ -239,7 +239,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.layer == 7)
         {
-            Debug.Log("COIN!");
+            GameManager.instance.PlaySound(GameManager.Sounds.coin);
             collision.gameObject.GetComponent<Coin>().AddCoin();
         }
 
@@ -259,19 +259,19 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Health"))
         {
             health.Heal(2);
+            GameManager.instance.PlaySound(GameManager.Sounds.powerup);
             collision.gameObject.SetActive(false);
         }
     }
 
     private void Attack()
     {
-
-
         Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.transform.position, attackRadius, enemyLayer);
 
         foreach (Collider2D enemy in enemies)
         {
             enemy.gameObject.GetComponent<EnemyHealth>().TakeDamage(playerDamage);
+            GameManager.instance.PlaySound(GameManager.Sounds.attack);
             Debug.Log("ouch");
         }
     }

@@ -23,6 +23,7 @@ public class PlayerHealth : MonoBehaviour
             currentHealth = Mathf.Max(0, currentHealth - damage);
             healthVisual.SetHealth(currentHealth);
             StartCoroutine(InvencibilityFrames());
+            GameManager.instance.PlaySound(GameManager.Sounds.hit);
         }
 
         if (currentHealth <= 0)
@@ -39,6 +40,7 @@ public class PlayerHealth : MonoBehaviour
     {
         Debug.Log("Player died!");
         respawnScript.Respawn();
+        GameManager.instance.PlaySound(GameManager.Sounds.death);
     }
 
     public float GetMaxHealth() => maxHealth;

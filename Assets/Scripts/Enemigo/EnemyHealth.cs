@@ -17,7 +17,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (!isInvincible)
         {
-            currentHealth =- damage;
+            currentHealth = - damage;
         }
 
         if (currentHealth <= 0 )
@@ -36,6 +36,7 @@ public class EnemyHealth : MonoBehaviour
         if (collision.gameObject.CompareTag("Player") && doesDamage)
         {
             Debug.Log("Damage Done");
+
             collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(damageAmount);
         }
     }

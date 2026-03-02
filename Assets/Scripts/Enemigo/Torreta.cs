@@ -22,5 +22,6 @@ public class Torreta : MonoBehaviour
     void Disparar()
     {
         Instantiate(balaPrefab, puntoDisparo.position, puntoDisparo.rotation);
+        GameManager.instance.PlaySound(GameManager.Sounds.attack);
     }
 }
